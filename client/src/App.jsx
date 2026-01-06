@@ -1,24 +1,45 @@
-import { useState } from "react"
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login"
 import Profile from "./pages/Profile"
+import ProductList from "./pages/ProductList";
+import PrivateRoute from "./components/PrivateRoute";
+import ProductDetails from "./pages/ProductDetails";
+import Cart from "./pages/Cart"
 function App() {
-  const [token, setToken] = useState(localStorage.getItem('token'));
-
-  const logout = () => {
-    localStorage.removeItem('token');
-    setToken(null);
-  }
   return (
-    <div>
-      {!token ? (
-        <Login setToken={setToken} />
-      ) : (
-        <>
-          <button onClick={logout}>Logout</button>
-          <Profile />
-        </>
-      )}
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route
+          path="/"
+          element={
+            <PrivateRoute>
+              <ProductList />
+            </PrivateRoute>
+          } />
+        <Route
+          path="/product/:id"
+          element={
+            <PrivateRoute>
+              <ProductDetails />
+            </PrivateRoute>
+          } />
+        <Route
+          path="/profile"
+          element={
+            <PrivateRoute>
+              <Profile />
+            </PrivateRoute>
+          } />
+        <Route
+          path="/cart"
+          element={
+            <PrivateRoute>
+              <Cart />
+            </PrivateRoute>
+          } />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
