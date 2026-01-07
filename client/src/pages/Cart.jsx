@@ -51,6 +51,7 @@ function Cart() {
                         </div>
                     ))}
                     <h3>Total: ₹{total}</h3>
+                    <a href="/checkout">Proceed to Checkout</a>
                 </>
             )}
         </div>
