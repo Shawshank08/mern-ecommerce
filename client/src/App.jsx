@@ -6,6 +6,9 @@ import PrivateRoute from "./components/PrivateRoute";
 import ProductDetails from "./pages/ProductDetails";
 import Cart from "./pages/Cart"
 import Checkout from "./pages/Checkout";
+import OrderDetails from "./pages/OrderDetails";
+import MyOrders from "./pages/MyOrders";
+
 function App() {
   return (
     <BrowserRouter>
@@ -44,6 +47,20 @@ function App() {
           element={
             <PrivateRoute>
               <Checkout />
+            </PrivateRoute>
+          } />
+        <Route
+          path="/order/:id"
+          element={
+            <PrivateRoute>
+              <OrderDetails />
+            </PrivateRoute>
+          } />
+        <Route
+          path="/myorders"
+          element={
+            <PrivateRoute>
+              <MyOrders />
             </PrivateRoute>
           } />
       </Routes>

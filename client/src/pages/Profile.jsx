@@ -39,6 +39,7 @@ function Profile() {
                 <p>Name : {user.name}</p>
                 <p>Email : {user.email}</p>
             </div>
+            <a href="/myorders">My Orders</a>
         </>
     );
 }

@@ -6,7 +6,7 @@ function Cart() {
     useEffect(() => {
         const savedCart = JSON.parse(localStorage.getItem("cart")) || [];
         setCart(savedCart);
-    },[])
+    }, [])
 
     const updateCart = (updatedCart) => {
         setCart(updatedCart);
@@ -14,19 +14,19 @@ function Cart() {
     }
 
     const increaseQty = (id) => {
-        const updated = cart.map(item => 
-            item.productId == id ? { ...item, qty: item.qty+1} : item
+        const updated = cart.map(item =>
+            item.productId == id ? { ...item, qty: item.qty + 1 } : item
         );
         updateCart(updated);
     }
-    
+
     const decreaseQty = (id) => {
-        const updated = cart.map(item => 
-            item.productId == id && item.qty > 1 ? { ...item, qty: item.qty-1} : item
+        const updated = cart.map(item =>
+            item.productId == id && item.qty > 1 ? { ...item, qty: item.qty - 1 } : item
         );
         updateCart(updated);
     }
-    
+
     const removeItem = (id) => {
         const updated = cart.filter(item => item.productId !== id);
         updateCart(updated);

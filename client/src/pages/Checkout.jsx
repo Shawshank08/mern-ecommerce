@@ -38,7 +38,7 @@ function Checkout() {
             },
         );
         localStorage.removeItem("cart");
-        navigate(`order/${data._id}`);
+        navigate(`/order/${data._id}`, {replace:true});
     };
 
     return (
