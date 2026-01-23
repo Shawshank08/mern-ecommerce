@@ -8,7 +8,12 @@ const { protect } = require('./middleware/authMiddleware');
 const orderRoutes = require('./routes/orderRoutes')
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "*",
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
