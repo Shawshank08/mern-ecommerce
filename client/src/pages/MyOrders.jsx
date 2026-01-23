@@ -7,7 +7,7 @@ function MyOrders(){
     useEffect(()=>{
         const fetchOrders = async () => {
             const token = localStorage.getItem("token");
-            const{ data } = await axios.get("http://localhost:5000/api/orders/myorders", {
+            const{ data } = await axios.get(`${API_BASE_URL}/api/orders/myorders`, {
                 headers:{
                     Authorization: `Bearer ${token}`,
                 },

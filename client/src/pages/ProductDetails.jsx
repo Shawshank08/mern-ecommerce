@@ -11,7 +11,7 @@ function ProductDetails() {
     useEffect(() => {
         const fetchProduct = async () => {
             try{
-                const { data } = await axios.get(`http://localhost:5000/api/products/${id}`);
+                const { data } = await axios.get(`${API_BASE_URL}/api/products/${id}`);
                 setProduct(data);
             }catch(err){
                 setError("Product not found");
