@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { formatPrice } from "../../../server/src/utils/formatCurrency";
+import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 
 function ProductDetails() {
@@ -16,7 +17,7 @@ function ProductDetails() {
                 setError("Product not found");
             }
         };
-        fetchProduct();
+        if(id) fetchProduct();
     }, [id]);
 
     if(error) return<p>{error}</p>;
@@ -24,12 +25,13 @@ function ProductDetails() {
 
     return(
         <div>
+            <Link to={"/"}>Back to Products</Link>
             <h2>{product.name}</h2>
             <img src={product.image} alt={product.name} width="250"/>;
             <p>Brand: {product.brand}</p>
             <p>Category: {product.category}</p>
             <p>{product.description}</p>
-            <p>Price: ₹{product.price}</p>
+            <p>Price: {formatPrice(product.price)}</p>
             <p>{product.countInStock > 0 ? "In Stock":"Out of Stock"}</p>
             <button onClick={() => {
                 const cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -40,9 +42,11 @@ function ProductDetails() {
                     price:product.price,
                     qty:1
                 };
-                const existItem = cart.find(x => x.productId === product._id);
-                if(existItem){
-                    existItem.qty += 1;
+                const exist = cart.find((x) => x.productId === product._id);
+                if(exist){
+                    cart.forEach((x)=>{
+                        if(x.productId === product._id) x.qty += 1;
+                    });
                 }else{
                     cart.push(item);
                 }

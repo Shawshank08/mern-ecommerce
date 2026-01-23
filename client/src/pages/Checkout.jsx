@@ -29,7 +29,7 @@ function Checkout() {
             totalPrice: itemsPrice,
         };
         const { data } = await axios.post(
-            "http://localhost:5000/api/orders",
+        "http://localhost:5000/api/orders",
             orderData,
             {
                 headers: {

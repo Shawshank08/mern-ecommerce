@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { formatPrice } from '../../../server/src/utils/formatCurrency';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
@@ -23,13 +24,14 @@ function ProductList() {
     return (
         <div>
             <h2>Products</h2>
+            <Link to={"/Profile"}>My Profile</Link>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px' }}>
                 {products.map(product => (
                     <Link key={product._id} to={`/product/${product._id}`} style={{ textDecoration: "none", color: "black" }}>
                         <div style={{ border: '1px solid #ccc', padding: '10px' }}>
                             <img src={product.image} alt={product.name} width="150" />
                             <h3>{product.name}</h3>
-                            <p>₹{product.price}</p>
+                            <p>{formatPrice(product.price)}</p>
                             <p>{product.countInStock > 0 ? 'In Stock' : 'Out of Stock'}</p>
                         </div>
                     </Link>

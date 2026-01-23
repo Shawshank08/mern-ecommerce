@@ -1,9 +1,11 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login"
-import Profile from "./pages/Profile"
+import Register from "./pages/Rrgister";
 import ProductList from "./pages/ProductList";
-import PrivateRoute from "./components/PrivateRoute";
 import ProductDetails from "./pages/ProductDetails";
+import Profile from "./pages/Profile"
+import PrivateRoute from "./components/PrivateRoute";
+import PublicRoutes from "./components/PublicRoutes";
 import Cart from "./pages/Cart"
 import Checkout from "./pages/Checkout";
 import OrderDetails from "./pages/OrderDetails";
@@ -13,7 +15,20 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/login" element={<Login />} />
+        <Route
+          path="/login"
+          element={
+            <PublicRoutes>
+              <Login />
+            </PublicRoutes>
+          } />
+        <Route
+          path="/register"
+          element={
+            <PublicRoutes>
+              <Register />
+            </PublicRoutes>
+          } />
         <Route
           path="/"
           element={

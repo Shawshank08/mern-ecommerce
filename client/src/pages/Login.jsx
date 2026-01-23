@@ -1,34 +1,34 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axios from 'axios';
 
-function Login({setToken}){
+function Login({ setToken }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
     const submitHandler = async (e) => {
         e.preventDefault();
-        try{
-            const{data} = await axios.post(
+        try {
+            const { data } = await axios.post(
                 'http://localhost:5000/api/auth/login',
-                {email, password}
+                { email, password }
             );
             localStorage.setItem('token', data.token);
-            navigate("/");
-        }catch(err){
+            navigate("/", { replace: true });
+        } catch (err) {
             setError(err.response?.data?.message || 'Login failed');
         }
     };
     return (
         <form onSubmit={submitHandler}>
             <h2>Login</h2>
-            {error && <p style={{color:'red'}}>{error}</p>}
+            {error && <p style={{ color: 'red' }}>{error}</p>}
             <input
                 type="email"
                 placeholder="Email"
                 value={email}
-                onChange={(e) =>setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
             />
             <input
                 type="password"
@@ -37,6 +37,9 @@ function Login({setToken}){
                 onChange={(e) => setPassword(e.target.value)}
             />
             <button type="submit">Login</button>
+            <p>
+                New user? <Link to="/register">Register</Link>
+            </p>
         </form>
     )
 }

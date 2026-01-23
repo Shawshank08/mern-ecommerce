@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 
 function Profile() {
@@ -39,7 +39,7 @@ function Profile() {
                 <p>Name : {user.name}</p>
                 <p>Email : {user.email}</p>
             </div>
-            <a href="/myorders">My Orders</a>
+            <Link to={"/myorders"}>My Orders</Link>
         </>
     );
 }

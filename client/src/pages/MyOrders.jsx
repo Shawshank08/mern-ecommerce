@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { formatPrice } from "../../../server/src/utils/formatCurrency";
 import axios from "axios";
 
 function MyOrders(){
@@ -24,7 +25,7 @@ function MyOrders(){
                 orders.map(order => (
                     <div key={orders._id}>
                         <p>Order ID: {order._id}</p>
-                        <p>Total: {order.totalPrice}</p>
+                        <p>Total: {formatPrice(order.totalPrice)}</p>
                         <a href={`order/${order._id}`}>View</a>
                     </div>
                 ))

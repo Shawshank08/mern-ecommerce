@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { formatPrice } from "../../../server/src/utils/formatCurrency";
 
 function Cart() {
     const [cart, setCart] = useState([]);
@@ -15,14 +17,14 @@ function Cart() {
 
     const increaseQty = (id) => {
         const updated = cart.map(item =>
-            item.productId == id ? { ...item, qty: item.qty + 1 } : item
+            item.productId === id ? { ...item, qty: item.qty + 1 } : item
         );
         updateCart(updated);
     }
 
     const decreaseQty = (id) => {
         const updated = cart.map(item =>
-            item.productId == id && item.qty > 1 ? { ...item, qty: item.qty - 1 } : item
+            item.productId === id && item.qty > 1 ? { ...item, qty: item.qty - 1 } : item
         );
         updateCart(updated);
     }
@@ -42,16 +44,17 @@ function Cart() {
             ) : (
                 <>
                     {cart.map(item => (
-                        <div key={item.productId}>
-                            <p>{item.name} x {item.qty}</p>
-                            <p>₹{item.price * item.qty}</p>
+                        <div key={item.productId} style={{ borderBottom: "1px solid #ddd", padding: "8px 0" }}>
+                            <p>{item.name}</p>
+                            <p>{formatPrice(item.price * item.qty)}</p>
                             <button onClick={() => decreaseQty(item.productId)}>-</button>
+                            <span style={{ margin: "0 8px" }}>{item.qty}</span>
                             <button onClick={() => increaseQty(item.productId)}>+</button>
-                            <button onClick={() => removeItem(item.productId)}>Remove</button>
+                            <button style={{ marginLeft: 12 }} onClick={() => removeItem(item.productId)}>Remove</button>
                         </div>
                     ))}
-                    <h3>Total: ₹{total}</h3>
-                    <a href="/checkout">Proceed to Checkout</a>
+                    <h3>Total: {formatPrice(total)}</h3>
+                    <Link to={"/checkout"}>Proceed to Checkout</Link>
                 </>
             )}
         </div>
