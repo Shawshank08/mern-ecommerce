@@ -5,7 +5,7 @@ import API_BASE_URL from "../api";
 
 function Checkout() {
     const navigate = useNavigate();
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const cart = JSON.parse(localStorage.getItem("cartItems")) || [];
 
     const [address, setAddress] = useState("");
     const [city, setCity] = useState("");
@@ -38,7 +38,7 @@ function Checkout() {
                 },
             },
         );
-        localStorage.removeItem("cart");
+        localStorage.removeItem("cartItems");
         navigate(`/order/${data._id}`, {replace:true});
     };
 
