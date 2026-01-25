@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { formatPrice } from "../../../server/src/utils/formatCurrency";
+import { formatPrice } from "../utils/formatCurrency";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import API_BASE_URL from "../api";
@@ -35,7 +35,7 @@ function ProductDetails() {
             <p>Price: {formatPrice(product.price)}</p>
             <p>{product.countInStock > 0 ? "In Stock":"Out of Stock"}</p>
             <button onClick={() => {
-                const cart = JSON.parse(localStorage.getItem("cart")) || [];
+                const cart = JSON.parse(localStorage.getItem("cartItems")) || [];
                 const item = {
                     productId:product._id,
                     name:product.name,
@@ -51,7 +51,7 @@ function ProductDetails() {
                 }else{
                     cart.push(item);
                 }
-                localStorage.setItem("cart", JSON.stringify(cart));
+                localStorage.setItem("cartItems", JSON.stringify(cart));
                 alert("Added to cart");
             }}>Add to Cart</button>
             <a href="/cart">Go to Cart</a>

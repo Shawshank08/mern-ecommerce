@@ -40,7 +40,7 @@ function OrderDetails() {
             <h3>Shipping</h3>
             <p>{order.shippingAddress.address}, {order.shippingAddress.city}</p>
             <h3>Items</h3>
-            {order.orderItems.map(item => (
+            {order.orderItems && order.orderItems.map(item => (
                 <div key={item._id}>
                     {item.name} X {item.qty} = {formatPrice(item.price * item.qty)};
                 </div>

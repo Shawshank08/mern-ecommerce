@@ -1,18 +1,18 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { formatPrice } from "../../../server/src/utils/formatCurrency";
+import { formatPrice } from "../utils/formatCurrency";
 
 function Cart() {
     const [cart, setCart] = useState([]);
 
     useEffect(() => {
-        const savedCart = JSON.parse(localStorage.getItem("cart")) || [];
+        const savedCart = JSON.parse(localStorage.getItem("cartItems")) || [];
         setCart(savedCart);
     }, [])
 
     const updateCart = (updatedCart) => {
         setCart(updatedCart);
-        localStorage.setItem("cart", JSON.stringify(updatedCart));
+        localStorage.setItem("cartItems", JSON.stringify(updatedCart));
     }
 
     const increaseQty = (id) => {
