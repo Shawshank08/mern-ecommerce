@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { formatPrice } from "../../../server/src/utils/formatCurrency";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
+import API_BASE_URL from "../api";
 
 function ProductDetails() {
     const { id } = useParams();

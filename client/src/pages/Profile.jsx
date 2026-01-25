@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import API_BASE_URL from "../api";
 import axios from "axios";
 
 function Profile() {
@@ -11,6 +12,7 @@ function Profile() {
         navigate("/login", { replace:true });
     }
     useEffect(() => {
+        console.log("API_BASE_URL:", API_BASE_URL);
         const fetchProfile = async () => {
             try {
                 const token = localStorage.getItem('token');

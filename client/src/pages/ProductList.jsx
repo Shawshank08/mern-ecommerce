@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { formatPrice } from '../../../server/src/utils/formatCurrency';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import API_BASE_URL from '../api';
 
 function ProductList() {
     const [products, setProducts] = useState([]);
